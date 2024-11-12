@@ -1,6 +1,6 @@
-import { Youtube, Book,  PenTool, Brain, Lightbulb } from 'lucide-react'
+import { Scroll } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import { Chrome, Github, Scroll, Mail } from "lucide-react"
+import { Chrome, Github, Mail } from "lucide-react"
 import { useState, useEffect } from 'react'
 import { 
   Play, 
@@ -9,15 +9,16 @@ import {
   Settings, 
   Maximize, 
   RotateCcw,
-  BookOpen,
-  BrainCircuit
 } from 'lucide-react'
 import {
   Card,
-  CardHeader,
-  CardTitle,
-  CardContent
 } from "@/components/ui/card"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 
 function Link({ href, children, className }: { href: string, children: React.ReactNode, className?: string }) {
   return (
@@ -76,29 +77,39 @@ function Link({ href, children, className }: { href: string, children: React.Rea
         <div className="flex items-center space-x-2">
           <img 
             src="/android-chrome-192x192.png" 
-            alt="YouTube Takeaways Logo" 
-            className="w-10 h-10 rounded-lg" // This matches the original 40px size with medium rounding
+            alt="Takeaways Logo" 
+            className="w-10 h-10 rounded-lg"
           />
-          <span className="text-xl font-bold">YouTube Takeaways</span>
+          <span className="text-xl font-bold">Takeaways</span>
         </div>
       </header>
 
       <main>
-        <section className="container mx-auto px-6 py-20 md:py-32">
+        <section className="container mx-auto px-4 md:px-6 py-12 md:py-32">
           <div className="max-w-3xl mx-auto text-center">
-            <Logo size={128} id="downloadableLogo" className="mx-auto mb-8" />
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">
-              Elevate Your YouTube Learning Experience
+            <Logo 
+              size={128} 
+              id="downloadableLogo" 
+              className="mx-auto mb-6 md:mb-8 w-20 md:w-32 h-20 md:h-32" 
+            />
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 md:mb-6 leading-tight">
+              Takeaways: Smart Notes for YouTube
             </h1>
-            <p className="text-xl text-gray-600 mb-10">
-              Capture key insights and test your knowledge while watching educational content. Seamlessly integrated, beautifully designed.
+            <p className="text-lg md:text-xl text-gray-600 mb-8 md:mb-10 leading-relaxed">
+              Get real-time key takeaways and interactive quizzes while watching podcasts or educational videos. Get more from youtube videos.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-              <Button size="lg" className="bg-gradient-to-r from-[#FF6B6B] via-[#A259FF] to-[#2B9FFF] text-white hover:opacity-90 transition-opacity">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-3 md:gap-4">
+              <Button 
+                size="lg" 
+                className="w-full sm:w-auto bg-gradient-to-r from-[#FF6B6B] via-[#A259FF] to-[#2B9FFF] text-white hover:opacity-90 transition-opacity"
+              >
                 <Chrome className="mr-2 h-5 w-5" /> Add to Chrome
               </Button>
-              <Link href="https://github.com/yourusername/youtube-takeaways" className="text-[#A259FF] hover:underline font-medium">
-                Visit GitHub
+              <Link 
+                href="https://github.com/aladynjr/youtube-takeaways"
+                className="flex items-center font-semibold text-sm text-black underline hover:text-gray-700 transition-all"
+              >
+                <Github className="mr-2 h-5 w-5" /> Visit GitHub
               </Link>
             </div>
           </div>
@@ -106,33 +117,42 @@ function Link({ href, children, className }: { href: string, children: React.Rea
 
         <section className="bg-gray-50 py-20 md:py-32">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">See It in Action</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">How it <span className="bg-gradient-to-r from-[#FF6B6B] via-[#A259FF] to-[#2B9FFF] bg-clip-text text-transparent">works</span></h2>
+            <p className="text-gray-600 text-center max-w-2xl mx-auto mb-16">
+              Key insights appear as you watch, with timeline markers showing exactly when each takeaway occurs.
+            </p>
             <div className="max-w-5xl mx-auto bg-white rounded-xl p-8 shadow-sm">
-              <div className="flex gap-4">
+              <div className="flex gap-4 flex-col lg:flex-row">
                 {/* YouTube Player */}
-                <div className="flex-1">
+                <div className="flex-1 opacity-80">
                   <div className="relative aspect-video bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg overflow-hidden border-2 border-gray-200">
-                    {/* Animated Background */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200">
+                    {/* Animated Background with White Gradient Overlay */}
+                    <div className="absolute inset-0">
+                      {/* Base gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200" />
+                      
+                      {/* White gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-transparent" />
+                      
                       {/* Simple Play Button Indicator */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-16 h-16 rounded-full bg-gray-300/30 flex items-center justify-center">
+                      <div className="absolute inset-0 flex items-center justify-center opacity-50">
+                        <div className="w-16 h-16 rounded-full bg-gray-300/20 flex items-center justify-center">
                           <div className="h-8 w-8 flex items-center justify-center gap-1">
-                            <div className="w-2 h-8 bg-gray-400 rounded-sm"></div>
-                            <div className="w-2 h-8 bg-gray-400 rounded-sm"></div>
+                            <div className="w-2 h-8 bg-gray-300 rounded-sm"></div>
+                            <div className="w-2 h-8 bg-gray-300 rounded-sm"></div>
                           </div>
                         </div>
                       </div>
                       
-                      {/* Subtle Animated Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-200/20 to-transparent animate-shimmer" />
+                      {/* Subtle Animated Gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-200/10 to-transparent animate-shimmer opacity-30" />
                     </div>
                     
                     {/* Video Controls */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-gray-200/80 to-transparent">
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-gray-100/90 to-transparent">
                       <div className="relative h-1 bg-gray-300 rounded-full mb-4">
                         <div 
-                          className="absolute left-0 top-0 h-full bg-gray-400 rounded-full transition-all duration-300"
+                          className="absolute left-0 top-0 h-full bg-red-500 rounded-full transition-all duration-300"
                           style={{ width: `${progress}%` }}
                         />
                       </div>
@@ -179,131 +199,126 @@ function Link({ href, children, className }: { href: string, children: React.Rea
                 </div>
 
                 {/* Takeaways Panel */}
-                <div className="w-80 space-y-3">
-                  {/* Progress Bar Card */}
-                  <Card className="p-4 bg-white shadow-sm">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-semibold">Takeaways</h3>
-                      <div className="flex items-center gap-2">
-                        <Button variant="outline" size="sm" className="text-xs bg-black text-white hover:bg-black/90 h-6 px-2">
-                          <Play className="h-2 w-2 mr-1 fill-current" /> Play Quiz
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
-                          <RotateCcw className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
+                <div className="w-full lg:w-80 space-y-3">
+                  <div className="rounded-xl p-[4px] bg-gradient-to-r from-[#FF6B6B] via-[#A259FF] to-[#2B9FFF]">
+                    <div className="bg-white p-4 rounded-lg space-y-3">
+                      {/* Progress Bar Card */}
+                      <Card className="p-4 bg-white shadow-sm">
+                        <div className="flex items-center justify-between mb-4">
+                          <h3 className="font-semibold">Takeaways</h3>
+                          <div className="flex items-center gap-2">
+                            <Button variant="outline" size="sm" className="text-xs bg-black text-white  h-6 px-2">
+                              <Play className="h-2 w-2 mr-1 fill-current" /> Play Quiz
+                            </Button>
+                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                              <RotateCcw className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
 
-                    <div className="relative h-1 bg-gray-100 rounded-full">
-                      <div 
-                        className="absolute left-0 top-0 h-full bg-gray-200 rounded-full transition-all duration-300"
-                        style={{ width: `${progress}%` }}
-                      />
-                      {takeaways.map((takeaway) => (
-                        <div
-                          key={takeaway.id}
-                          className={`absolute top-1/2 -translate-y-1/2 h-3 w-3 rounded-full transition-all duration-300
-                            ${takeaway.id === currentTakeaway ? 'bg-red-500 scale-125' : 'bg-blue-200 scale-100'}`}
-                          style={{ left: `calc(${takeaway.time}% - 6px)` }}
-                        />
-                      ))}
-                    </div>
-                  </Card>
+                        <div className="relative h-1 bg-gray-100 rounded-full">
+                          <div 
+                            className="absolute left-0 top-0 h-full bg-gray-200 rounded-full transition-all duration-300"
+                            style={{ width: `${progress}%` }}
+                          />
+                          {takeaways.map((takeaway) => (
+                            <div
+                              key={takeaway.id}
+                              className={`absolute top-1/2 -translate-y-1/2 h-3 w-3 rounded-full transition-all duration-300
+                                ${takeaway.id === currentTakeaway ? 'bg-red-500 scale-125' : 'bg-blue-200 scale-100'}`}
+                              style={{ left: `calc(${takeaway.time}% - 6px)` }}
+                            />
+                          ))}
+                        </div>
+                      </Card>
 
-                  {/* Current Takeaway Card */}
-                  <Card className="p-4 bg-white shadow-sm">
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="h-2 w-2 bg-red-500 rounded-full" />
-                      <span className="font-medium">Key Takeaway #{currentTakeaway}</span>
+                      {/* Current Takeaway Card */}
+                      <Card className="p-4 bg-white shadow-sm">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="h-2 w-2 bg-red-500 rounded-full" />
+                          <span className="font-medium">Key Takeaway #{currentTakeaway}</span>
+                        </div>
+                        <p className="text-gray-600 text-sm leading-relaxed">
+                          {takeaways.find(t => t.id === currentTakeaway)?.text}
+                        </p>
+                      </Card>
                     </div>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {takeaways.find(t => t.id === currentTakeaway)?.text}
-                    </p>
-                  </Card>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="container mx-auto px-6 py-20 md:py-32">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Key Features</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="p-6">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <BookOpen className="mr-2 text-[#FF6B6B]" /> Smart Takeaways
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                Key points appear seamlessly as you watch, helping you retain information effortlessly.
-              </CardContent>
-            </Card>
-            <Card className="p-6">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <BrainCircuit className="mr-2 text-[#A259FF]" /> Interactive Quizzes
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                Test your understanding with intelligently timed knowledge checks.
-              </CardContent>
-            </Card>
-            <Card className="p-6">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Scroll className="mr-2 text-[#2B9FFF]" /> Seamless Integration
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                Designed to complement your viewing experience, not interrupt it.
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        <section className="bg-gray-50 py-20 md:py-32">
-          <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Frequently Asked Questions</h2>
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {[
-                { q: "How does YouTube Takeaways work?", a: "Our extension analyzes the video content in real-time, extracting key points and generating quizzes to enhance your learning experience." },
-                { q: "Is it free to use?", a: "Yes, YouTube Takeaways is completely free and open-source." },
-                { q: "Can I use it on any YouTube video?", a: "While it works best with educational content, you can use it on any YouTube video." },
-                { q: "How can I contribute to the project?", a: "Visit our GitHub repository to contribute code, report issues, or suggest new features." }
-              ].map((faq, index) => (
-                <Card key={index} className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{faq.q}</h3>
-                  <p className="text-gray-600">{faq.a}</p>
-                </Card>
-              ))}
+        <section className="bg-gray-50 py-12 md:py-32">
+          <div className="container mx-auto px-4 md:px-6">
+            <h2 className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-16">Features & FAQ</h2>
+            <div className="max-w-3xl mx-auto">
+              <Accordion type="single" collapsible className="w-full">
+                {[
+                  { 
+                    q: "What are the key features?", 
+                    a: "YouTube Takeaways offers three main features:\n\n" +
+                       "1. Real-time Takeaways: Key points appear automatically as you watch, synchronized with the video timeline.\n\n" +
+                       "2. Interactive Timeline: Visual markers show important moments, making it easy to revisit key concepts.\n\n" +
+                       "3. AI-Generated Quizzes: Test your understanding with automatically generated questions based on the video content."
+                  },
+                  { 
+                    q: "How does YouTube Takeaways work?", 
+                    a: "The extension uses video captions and Gemini AI to analyze content in real-time. It processes the captions locally, identifies key points, and generates relevant quiz questions. All data is cached for faster loading on repeat views." 
+                  },
+                  { 
+                    q: "Is it free to use?", 
+                    a: "The extension is free and open-source. You'll need a free Google AI (Gemini) API key from Google AI Studio to use it. The free tier includes thousands of requests per month." 
+                  },
+                  { 
+                    q: "Can I use it on any YouTube video?", 
+                    a: "The extension works best with educational content, lectures, and interviews that have captions enabled. It analyzes the video content to ensure it's suitable for generating takeaways." 
+                  },
+                  { 
+                    q: "How can I contribute to the project?", 
+                    a: "Visit our GitHub repository to contribute code, report issues, or suggest new features. The project is open-source and welcomes community contributions." 
+                  }
+                ].map((faq, index) => (
+                  <AccordionItem key={index} value={`item-${index}`}>
+                    <AccordionTrigger className="text-left">{faq.q}</AccordionTrigger>
+                    <AccordionContent className="whitespace-pre-line">{faq.a}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </div>
           </div>
         </section>
 
-        <section className="container mx-auto px-6 py-20 md:py-32 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Get in Touch</h2>
-          <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+        <section className="container mx-auto px-4 md:px-6 py-12 md:py-32 text-center">
+          <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">Get in Touch</h2>
+          <p className="text-lg md:text-xl text-gray-600 mb-6 md:mb-10 max-w-2xl mx-auto">
             Have questions or suggestions? We'd love to hear from you. Reach out to the developer directly.
           </p>
-          <Button size="lg" className="bg-gray-900 text-white hover:bg-gray-800 transition-colors">
+          <Button 
+            size="lg" 
+            className="bg-gray-900 text-white hover:bg-gray-800 transition-colors"
+            onClick={() => window.open('https://x.com/aladdinnjr', '_blank')}
+          >
             <Mail className="mr-2 h-5 w-5" /> Contact Developer
           </Button>
         </section>
       </main>
 
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-6">
+      <footer className="bg-gray-900 text-white py-8 md:py-12">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-4 mb-4 md:mb-0">
-              <Logo size={40} />
-              <span className="text-sm">© 2024 YouTube Takeaways</span>
+              <img 
+                src="/android-chrome-192x192.png" 
+                alt="Takeaways Logo" 
+                className="w-10 h-10 rounded-lg"
+              />
+              <span className="text-sm">© 2024 Takeaways</span>
             </div>
             <nav>
               <ul className="flex space-x-6">
-                <li><Link href="#" className="text-sm hover:text-[#A259FF] transition-colors">Privacy</Link></li>
-                <li><Link href="#" className="text-sm hover:text-[#A259FF] transition-colors">Terms</Link></li>
-                <li><Link href="https://github.com/yourusername/youtube-takeaways" className="text-sm hover:text-[#A259FF] transition-colors">GitHub</Link></li>
+                <li><Link href="/privacy-policy.html" className="text-sm hover:text-[#A259FF] transition-colors">Privacy</Link></li>
               </ul>
             </nav>
           </div>
